@@ -1,3 +1,4 @@
+#สร้าง SSID และกำหนด VLAN
 dot11 ssid Mansh1
  vlan 10
  authentication open
@@ -11,6 +12,8 @@ dot11 ssid Mansh2
  authentication key-management wpa version 2
  wpa-psk ascii password123
  mbssid gust-mode
+
+#ตั้งค่า Wireless Interface
 
 int Dot11Radio0
  encryption vlan 10 mode ciphers aes-ccm
@@ -26,6 +29,7 @@ int Dot11Radio0
  ssid Mansh1
  ssid Mansh2
 
+ #สร้าง Sub-Interface สำหรับ VLAN
 int Dot11Radio0.10
  encryption dot1Q 10
  bridge-group 10
@@ -34,11 +38,11 @@ int Dot11Radio0.20
  encryption dot1Q 20
  bridge-group 20
 
+#ตั้งค่า Ethernet Trunk Interface
 interface GigabitEthernet0
  no ip address
- duplex auto
- speed auto
  no shutdown
+
 interface GigabitEthernet0.10
  encapsulation dot1Q 10
  bridge-group 10
@@ -47,9 +51,11 @@ interface GigabitEthernet0.20
  encapsulation dot1Q 20
  bridge-group 20
 
+#Bridge Group และ Routing
 bridge 10 route ip
 bridge 20 route ip
 bridge irb
 
+#ตั้งค่า Virtual Interface เพื่อรับ DHCP
 interface BVI1
  ip address dhcp
