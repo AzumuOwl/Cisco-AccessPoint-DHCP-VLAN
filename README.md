@@ -20,3 +20,8 @@ dot11 ssid Manosh2
  authentication key-management wpa version 2
  wpa-psk ascii password456
  mbssid guest-mode
+
+```shell
+---
+
+## ✅ สร้าง SSID
