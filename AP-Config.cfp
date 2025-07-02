@@ -13,7 +13,14 @@ dot11 ssid Mansh2
  mbssid gust-mode
 
 int Dot11Radio0
- encryption mode ciphers aes-ccm
+ encryption vlan 10 mode ciphers aes-ccm
+ no shu
+ mbssid
+ ssid Mansh1
+ ssid Mansh2
+
+int Dot11Radio0
+ encryption vlan20 mode ciphers aes-ccm
  no shu
  mbssid
  ssid Mansh1
