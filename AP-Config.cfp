@@ -1,0 +1,48 @@
+dot11 ssid Mansh1
+ vlan 10
+ authentication open
+ authentication key-management wpa version 2
+ wpa-psk ascii password123
+ mbssid gust-mode
+
+dot11 ssid Mansh2
+ vlan 20
+ authentication open
+ authentication key-management wpa version 2
+ wpa-psk ascii password123
+ mbssid gust-mode
+
+int Dot11Radio0
+ encryption mode ciphers aes-ccm
+ no shu
+ mbssid
+ ssid Mansh1
+ ssid Mansh2
+
+int Dot11Radio0.10
+ encryption dot1Q 10
+ bridge-group 10
+
+int Dot11Radio0.20
+ encryption dot1Q 20
+ bridge-group 20
+
+interface GigabitEthernet0
+ no ip address
+ duplex auto
+ speed auto
+ no shutdown
+interface GigabitEthernet0.10
+ encapsulation dot1Q 10
+ bridge-group 10
+
+interface GigabitEthernet0.20
+ encapsulation dot1Q 20
+ bridge-group 20
+
+bridge 10 route ip
+bridge 20 route ip
+bridge irb
+
+interface BVI1
+ ip address dhcp
