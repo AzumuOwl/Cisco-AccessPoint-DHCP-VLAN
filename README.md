@@ -1,27 +1,11 @@
 # 📡 Access Point Configuration with Multi-SSID, VLAN, and DHCP
 
-โปรเจกต์นี้เป็นการตั้งค่า **Cisco Autonomous Access Point** เพื่อใช้งาน **หลาย SSID** โดยแต่ละ SSID แยก VLAN กัน และสามารถรับ IP ผ่าน DHCP จาก Router ได้
+📶 Cisco AP VLAN + SSID Setup (แจก IP แยกตาม SSID)
+โปรเจคนี้คือการตั้งค่า Access Point ของ Cisco ให้สามารถสร้าง Wi-Fi หลายชื่อ (SSID) และแจก IP แยกตาม VLAN อย่างถูกต้อง โดยใช้ Bridge Group Interface (BVI) เพื่อรับ IP จาก DHCP Server (เช่น Router)
 
----
+📌 เป้าหมาย
+SSID_A → อยู่ใน VLAN 10 → ได้ IP ในวงของ VLAN 10
 
-## ✅ สร้าง SSID
+SSID_B → อยู่ใน VLAN 20 → ได้ IP ในวงของ VLAN 20
 
-```shell
-dot11 ssid Manosh1
- vlan 10
- authentication open
- authentication key-management wpa version 2
- wpa-psk ascii password123
- mbssid guest-mode
-
-dot11 ssid Manosh2
- vlan 20
- authentication open
- authentication key-management wpa version 2
- wpa-psk ascii password456
- mbssid guest-mode
-
-```shell
----
-
-## ✅ สร้าง SSID
+ใช้ trunk port เพื่อเชื่อมกับ switch/router ที่รองรับ VLAN
